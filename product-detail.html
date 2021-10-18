@@ -1,0 +1,26 @@
+{% extends "cart/base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'cart/styles.css' %}" type="text/css">
+    <title>Product</title>
+</head>
+<body>
+    <div class="container my-5">
+        <h3>Product Name:{{object.title}}</h3>
+        <h3>Price{{object.price}}</h3>
+        <a href="{{object.get_add_to_cart}}" class="btn btn-primary">Add to cart</a>
+        <a href="{{object.get_remove_from_cart}}" class="btn btn-danger">Remove from cart</a>
+
+    </div>
+    
+
+</body>
+</html>
+{% include "cart/footer.html"%}
+{% endblock content%}

@@ -1,0 +1,54 @@
+{% extends "cart/base.html"%}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'cart/styles.css' %}" type="text/css">
+    <title>Product</title>
+    
+</head>
+<body  >
+  <h1 class="text-center p-3"><b>DRY FRUITS</b></h1>
+  <div class="btn-group px-5 mx-5 mb-2" style="float: right;">
+    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Filter
+    </button>
+    <div class="dropdown-menu">
+      <a href="{% url 'cart:products'%}?category=none" class="dropdown-item">All</a>
+      {% for category in categories%}
+      <a href="{% url 'cart:products'%}?category={{category.name}}" class="dropdown-item">{{category.name}}</a>
+      {%endfor%}
+       
+    </div>
+  </div>
+
+   
+    <div class="card-group animated fade-In my-5 container"   >
+        {% for item in object_list %}
+        <div class="col-sm-12 col-lg-4" style="padding: 01cm;">
+        <div class="card p-3 mb-5 bg-white rounded">
+            
+            <div class="card-body">
+              <a href="{{ item.get_absolute_url }}" class="link-dark no-underline text-warning p-2"> <b>PRODUCT NAME:{{item.title}}</b> </a>
+              <p class="text-info p-2">{{item.description}}</p>
+              <p class="text-success"><b>Categerory:   {{item.category}}</b></p>
+              <h5 class="card-text"><b>Prize:  {{item.price}}</b></h5>
+              <a href="{{item.get_add_to_cart}}" class="btn btn-dark" style="float:right;">Add to cart</a>
+               
+            
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <h2 class="text-warning p-2" style="margin-bottom: 30%;">Sorry No products available right now will be back soon</h2>
+        {% endfor %}
+        </div>
+      </div>
+</body>
+</html>
+{% include "cart/footer.html"%}
+{% endblock %}
